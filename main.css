@@ -1,0 +1,23 @@
+body {
+    background-color: #161616;
+}
+
+#data {
+    color: #FFFFFF;
+    width: 50%;
+    margin: auto;
+    font-size: 1rem;
+}
+
+img {
+    display: block;
+    margin: auto;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h2#temperature {
+    color: #05568D;
+}

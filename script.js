@@ -13,7 +13,7 @@ $(document).ready(function() {
             var jqxhr = $.getJSON(URL + '&lat=' + latitude +
                             '&lon=' + longitude + '&units=imperial')
                 .done(function(response) {
-                    displayLocationWeather(response.name, response.weather[0].main, response.main.temp);
+                    displayLocationWeather(response.name, response.weather[0].main, response.main.temp, response.weather[0].icon);
 
                 })
                 .fail(function(response) {
@@ -27,21 +27,27 @@ $(document).ready(function() {
         var Ftemp;
         var Ctemp;
         var imperial;
-        function displayLocationWeather(city, weather, temperature) {
-            $('#data').html(city + ' ' + weather + ' temperature is ' + temperature + ' Fahrenheit');
+        var weatherName;
+        function displayLocationWeather(city, weather, temperature, iconID) {
             cityName = city;
             cityWeather = weather;
-            Ftemp = temperature;
-            Ctemp = (temperature - 32) * 5 / 9;
+            Ftemp = parseFloat(temperature).toFixed(2);
+            Ctemp = parseFloat((temperature - 32) * 5 / 9).toFixed(2);
             imperial = true;
+            weatherName = weather;
+
+            $('h1#city').html(city);
+            $('h2#temperature').html(Ftemp + '&#176;F ' + weather);
+            $('#data').append('<img src="http://openweathermap.org/img/w/' + iconID + '.png" alt="weather icon">')
+
         }
 
-        $('#switch').on('click', function() {
+        $('h2#temperature').click(function() {
             imperial = !imperial;
             if(imperial) {
-                $('#data').html(cityName + ' ' + cityWeather + ' temperature is ' + Ftemp + ' Fahrenheit');
+                $('h2#temperature').html(Ftemp + '&#176;F ' + weatherName);
             } else {
-                $('#data').html(cityName + ' ' + cityWeather + ' temperature is ' + Ctemp + ' Celcius');
+                $('h2#temperature').html(Ctemp + '&#176;C ' + weatherName);
             }
         })
 
