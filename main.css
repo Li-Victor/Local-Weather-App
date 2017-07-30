@@ -1,23 +1,31 @@
 body {
-    background-color: #161616;
+    background-color: #FF80AB;
 }
 
 #data {
     color: #FFFFFF;
     width: 50%;
     margin: auto;
-    font-size: 1rem;
+    margin-top: 20vh;
+    font-size: 3.75vh;
 }
 
 img {
     display: block;
     margin: auto;
+    width: 20vw;
 }
 
 h1, h2 {
     text-align: center;
 }
 
+h1 {
+    background-color: #03A9F4;
+}
+
 h2#temperature {
-    color: #05568D;
+    color: #1A237E;
+    cursor: pointer;
+    background-color: #E8EAF6;
 }

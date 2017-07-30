@@ -1,8 +1,10 @@
 "use strict";
 $(document).ready(function() {
     //browsers geolocation
+
+    //Open Weather Map API
     if(navigator.geolocation) {
-        var URL = 'http://api.openweathermap.org/data/2.5/weather?appid=307bb89abee478e231ee1dba858e80b4';
+        var URL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?appid=307bb89abee478e231ee1dba858e80b4';
 
         navigator.geolocation.getCurrentPosition(function(position) {
             getUserLocation(position.coords.latitude, position.coords.longitude);
@@ -10,7 +12,7 @@ $(document).ready(function() {
 
         function getUserLocation(latitude, longitude) {
 
-            var jqxhr = $.getJSON(URL + '&lat=' + latitude +
+            $.getJSON(URL + '&lat=' + latitude +
                             '&lon=' + longitude + '&units=imperial')
                 .done(function(response) {
                     displayLocationWeather(response.name, response.weather[0].main, response.main.temp, response.weather[0].icon);
@@ -22,15 +24,12 @@ $(document).ready(function() {
 
         }
 
-        var cityName;
-        var cityWeather;
         var Ftemp;
         var Ctemp;
         var imperial;
         var weatherName;
+
         function displayLocationWeather(city, weather, temperature, iconID) {
-            cityName = city;
-            cityWeather = weather;
             Ftemp = parseFloat(temperature).toFixed(2);
             Ctemp = parseFloat((temperature - 32) * 5 / 9).toFixed(2);
             imperial = true;
@@ -52,7 +51,8 @@ $(document).ready(function() {
         })
 
     } else {
-        $('#data').html('Please share location');
+
+        $('#data').html('Your browser does not support Geolocaion');
     }
 
 })
